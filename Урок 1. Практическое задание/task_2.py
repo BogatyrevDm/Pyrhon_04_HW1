@@ -39,7 +39,7 @@ def sort_linear(list_to_check):
     min_value = 0 # O(1)
     for i in range(len(list_to_check)): # O(len(list_to_check))
         current_value = list_to_check[i] # O(1)
-        if (i == 1) or (min_value > current_value): # O(1)
+        if i == 1 or min_value > current_value: # O(1)
             min_value = current_value # O(1)
     return min_value # O(1)
 

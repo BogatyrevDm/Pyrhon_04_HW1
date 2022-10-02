@@ -19,7 +19,21 @@
 
 company_storage = {'Google':15000, 'Apple':2000, 'Microsoft':4000, 'Netflix':9000}
 
-# O(N log N)
-sorted_company_storage = sorted(company_storage.values(), reverse=True)
-print(company_storage.values())
+# O(n^2)
+def get_max_values(quantity):
 
+    new_storage = {} # O(1)
+    for i in range(quantity): # O(N)
+        max_value = 0 # O(1)
+        max_key = '' # O(1)
+        j = 0 # O(1)
+        for key, value in company_storage.items(): # O(N)
+            j += 1 # O(1)
+            if j == 1 or max_value < value: # O(1)
+                max_value = value # O(1)
+                max_key = key # O(1)
+        new_storage[max_key] = max_value # O(1)
+        company_storage.pop(max_key) # O(1)
+    print(new_storage)
+
+get_max_values(3)

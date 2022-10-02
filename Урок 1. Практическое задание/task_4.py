@@ -26,6 +26,7 @@
 users = {'Sergey':{'password':123, 'active':True}, 'Vasily':{'password':321, 'active':False}}
 
 # Везде будет O(1)
+# Не совсем понял, какой разбор надо посмотреть?
 
 def check_user(name, password):
     user = users.get(name)
