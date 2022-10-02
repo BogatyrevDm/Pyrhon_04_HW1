@@ -17,3 +17,9 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company_storage = {'Google':15000, 'Apple':2000, 'Microsoft':4000, 'Netflix':9000}
+
+# O(N log N)
+sorted_company_storage = sorted(company_storage.values(), reverse=True)
+print(company_storage.values())
+
