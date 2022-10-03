@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_and_uneven_numerics(numeric, even=0, uneven=0):
+    remainder = numeric % 10
+    division_result = numeric // 10
+
+    if remainder % 2 == 0:
+        even += 1
+    else:
+        uneven += 1
+    if division_result == 0:
+
+        print(f'Количество четных и нечетных цифр в числе равно: {even}, {uneven}')
+    else:
+        even_and_uneven_numerics(division_result, even, uneven)
+
+
+even_and_uneven_numerics(34560)
+
+even_and_uneven_numerics(123)

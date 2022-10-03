@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def summ_all(first_number, last_number, result=0):
+    result += first_number
+    if first_number == last_number:
+        return result
+    else:
+        return summ_all(first_number + 1, last_number, result)
+
+
+n = 5
+print(summ_all(1, n) == n * (n + 1) / 2)
+n = 10
+print(summ_all(1, n) == n * (n + 1) / 2)

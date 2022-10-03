@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def calculate_summ(number, max_count, result, count=0):
+    count += 1
+    current_number = number / -2
+    result += current_number
+    if count == max_count:
+        return result
+    else:
+        return calculate_summ(current_number, max_count, result, count)
+
+
+max_count = int(input('Введите количество чисел ряда:'))
+print(calculate_summ(1, max_count - 1, 1))
