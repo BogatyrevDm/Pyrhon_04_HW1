@@ -18,3 +18,19 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def make_inversion(numeric, result=''):
+    remainder = numeric % 10
+    division_result = numeric // 10
+
+    result += str(remainder)
+
+    if division_result == 0:
+        print(f'{result}')
+    else:
+        make_inversion(division_result, result)
+
+
+make_inversion(1230)
+make_inversion(1238)

@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_symbol_table(first_symbol_number: int, last_symbol_number: int, result='', counter=0):
+    counter += 1
+    result += f'{first_symbol_number} - {chr(first_symbol_number)} '
+
+    if counter == 10 or first_symbol_number == last_symbol_number:
+        print(result)
+        counter = 0
+        result = ''
+
+    if not first_symbol_number == last_symbol_number:
+        print_symbol_table(first_symbol_number + 1, last_symbol_number, result, counter)
+
+
+print_symbol_table(32, 127)

@@ -27,3 +27,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    sign_result = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if not sign_result == '0':
+        if not (sign_result == '+' or sign_result == '-' or sign_result == '*' or sign_result == '/'):
+            print('Вы ввели не верный знак!')
+            calculator()
+        else:
+            first_numeric_result = input('Введите первое число:')
+            if not first_numeric_result.isdigit():
+                print('Вы ввели не число! Исправьтесь!')
+                calculator()
+            else:
+                second_numeric_result = input('Введите второе число:')
+                if not second_numeric_result.isdigit():
+                    print('Вы ввели не число! Исправьтесь!')
+                    calculator()
+                else:
+                    if sign_result == '+':
+                        result = int(first_numeric_result) + int(second_numeric_result)
+                    elif sign_result == '-':
+                        result = int(first_numeric_result) - int(second_numeric_result)
+
+                    elif sign_result == '*':
+                        result = int(first_numeric_result) * int(second_numeric_result)
+
+                    else:
+                        if int(second_numeric_result) == 0:
+                            print('На ноль делить нельзя! Исправьтесь!')
+                            calculator()
+                        result = int(first_numeric_result) / int(second_numeric_result)
+                    print(f'Ваш результат {result}')
+                    calculator()
+    else:
+        print('Расчет окончен!')
+
+
+calculator()
