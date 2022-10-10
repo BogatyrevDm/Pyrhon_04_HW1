@@ -63,7 +63,22 @@ def recursive_reverse_mem(number):
         return ''
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
-
+print('Оптимизированная функция recursive_reverse_mem')
+print(
+    timeit(
+        'recursive_reverse_mem(num_100)',
+        setup='from __main__ import recursive_reverse_mem, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_1000)',
+        setup='from __main__ import recursive_reverse_mem, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_10000)',
+        setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
 
 
 # Кажется, что меморизация не нужна. Цифры, передаваемые в рекурсивную функция не будут повторяться,
