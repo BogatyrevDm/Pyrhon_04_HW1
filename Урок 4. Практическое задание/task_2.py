@@ -63,7 +63,6 @@ def recursive_reverse_mem(number):
         return ''
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
-
 print('Оптимизированная функция recursive_reverse_mem')
 print(
     timeit(
@@ -80,3 +79,9 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+# Кажется, что меморизация не нужна. Цифры, передаваемые в рекурсивную функция не будут повторяться,
+# потому что мы постепенно отрезаем от числа по разряду.
+# Т.е. для числа 1234 в кеш последовательно попадет 1234, 123, 12 и 1.
+# Но почему оптимизированная функция работает быстрее - я объяснить не могу

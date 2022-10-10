@@ -9,6 +9,7 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +38,26 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    new_array = [array.count(el) for el in array]
+
+    max_2 = max(new_array)
+    elem = array[new_array.index(max_2)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+print("func_1 ", timeit(stmt="func_1()", number=1000000, globals=globals()), "seconds")
+print("func_2 ", timeit(stmt="func_2()", number=1000000, globals=globals()), "seconds")
+print("func_3 ", timeit(stmt="func_3()", number=1000000, globals=globals()), "seconds")
 print(func_1())
 print(func_2())
+print(func_3())
+
+"""
+func_1  1.1156778000295162 seconds
+func_2  1.451792000036221 seconds
+func_3  1.3789800999802537 seconds
+Решение в одну строчку придумать не смог. Чуть ускорил второй вариант за счет применение List Comprehension
+Вторая функция медленнее первой потому, что кроме цикла там еще используется функция max
+"""
