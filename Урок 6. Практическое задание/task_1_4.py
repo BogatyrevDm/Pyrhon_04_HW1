@@ -30,3 +30,55 @@
 
 Это файл для четвертого скрипта
 """
+from pympler import asizeof
+
+
+# Практическое задание из 9 урока курса по основам.
+class Road:
+    def __init__(self, length: int, width: int):
+        """конструктор класса
+        :param length: длинна в метрах
+        :param width: ширина в метрах
+        """
+        self._length = length
+        self._width = width
+
+    def calculate(self, height: int = 5, mass_m_2: int = 25) -> int:
+        """
+        считает масу массу асфальта, необходимого для покрытия всей дороги в тоннах
+        :param height: высота дорожного полотна в сантиметрах
+        :param mass_m_2: масса в кг квадратного метра дороги высотой 1 см
+        :return: int значение тонн, дробная часть если есть НЕ учитывается
+        """
+        return self._length * self._width * height * mass_m_2 // 1000
+
+
+road = Road(5000, 20)
+print(asizeof.asizeof(road))  # 328
+
+
+class Road_Sloted:
+    __slots__ = ['_length', '_width']
+
+    def __init__(self, length: int, width: int):
+        """конструктор класса
+        :param length: длинна в метрах
+        :param width: ширина в метрах
+        """
+        self._length = length
+        self._width = width
+
+    def calculate(self, height: int = 5, mass_m_2: int = 25) -> int:
+        """
+        считает масу массу асфальта, необходимого для покрытия всей дороги в тоннах
+        :param height: высота дорожного полотна в сантиметрах
+        :param mass_m_2: масса в кг квадратного метра дороги высотой 1 см
+        :return: int значение тонн, дробная часть если есть НЕ учитывается
+        """
+        return self._length * self._width * height * mass_m_2 // 1000
+
+
+road = Road_Sloted(5000, 20)
+print(asizeof.asizeof(road))  # 112
+
+# Для оптимизации использовал слоты. Произошло сокращение памяти с 328 до 112

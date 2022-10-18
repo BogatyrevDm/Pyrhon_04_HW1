@@ -30,3 +30,53 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# Практическое задание из урока 3 курса по алгоритмам
+@decor
+def list_fill(list_example, n):
+    for i in range(n):
+        list_example.append(i)
+    return list_example
+
+
+# Оптимизация использования памяти. Используем генератор
+def gen_opt(n):
+    for i in range(n):
+        yield i
+
+
+@decor
+def list_fill_opt(list_example, n):
+    gen = gen_opt(n)
+    for i in gen:
+        list_example.append(i)
+
+
+list_example = []
+n = 1000000
+
+# заполнение списка
+res, mem_diff = list_fill(list_example, n)
+
+print(f"Выполнение заняло {mem_diff} Mib")
+# Выполнение заняло 38.91015625 Mib
+
+# заполнение списка
+gen, mem_diff = list_fill_opt(list_example, n)
+
+print(f"Выполнение оптимизированной функции заняло {mem_diff} Mib")
+# Выполнение оптимизированной функции заняло 38.2421875 Mib
+# Для оптимизации использовал генератор. Произошло не значительное сокращение объема занимаемой памяти

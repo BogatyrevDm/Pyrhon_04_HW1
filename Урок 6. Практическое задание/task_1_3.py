@@ -30,3 +30,48 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# Практическое задание из 1 урока курса по основам.
+@decor
+def capitalize_list():
+    raw_data = ['инженер-конструктор Игорь', 'главный бухгалтер МАРИНА', 'токарь высшего разряда нИКОЛАй',
+                'директор аэлита']
+    # Вариант с промежуточным списком
+    for i in raw_data:
+        _words = i.split(' ')
+        print("Привет, " + _words[-1].capitalize() + "!")
+
+
+res, mem_diff = capitalize_list()
+print(f"Выполнение заняло {mem_diff} Mib")
+
+
+# Выполнение заняло 0.015625 Mib
+
+@decor
+def capitalize_list_opt():
+    raw_data = ['инженер-конструктор Игорь', 'главный бухгалтер МАРИНА', 'токарь высшего разряда нИКОЛАй',
+                'директор аэлита']
+    # Вариант с промежуточным списком
+    for i in raw_data:
+        _words = i.split(' ')
+        print(f'Привет, {_words[-1].capitalize()}!')
+
+
+res, mem_diff = capitalize_list_opt()
+print(f"Выполнение заняло {mem_diff} Mib")
+# Выполнение заняло 0.0 Mib
+# Для оптимизации использовал замену конкатенации на f-строку. Произошло значительное сокращение используемой памяти

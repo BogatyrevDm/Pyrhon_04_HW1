@@ -30,3 +30,56 @@
 
 Это файл для пятого скрипта
 """
+from pympler import asizeof
+
+
+# Практическое задание из 9 урока курса по основам.
+class Worker:
+
+    def __init__(self, name: str, surname: str, position: str, income: dict):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = income
+
+
+class Position(Worker):
+
+    def get_full_name(self) -> str:
+        """Возвращает строку по формату 'Имя Фамилия'"""
+        return f'{self.name.capitalize()} {self.surname.capitalize()}'
+
+    def get_total_income(self) -> int:
+        """Возвращает суммарный ежемесячных доход"""
+        return self._income["wage"] + self._income["bonus"]
+
+
+welder = Position('иван', 'васильев', 'сварщик', {'wage': 50000, 'bonus': 15000})
+print(asizeof.asizeof(welder))  # 1064
+
+
+class Worker_Sloted:
+    __slots__ = ['name', 'surname', 'position', '_income']
+
+    def __init__(self, name: str, surname: str, position: str, income: dict):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = income
+
+
+class Position_Sloted(Worker_Sloted):
+
+    def get_full_name(self) -> str:
+        """Возвращает строку по формату 'Имя Фамилия'"""
+        return f'{self.name.capitalize()} {self.surname.capitalize()}'
+
+    def get_total_income(self) -> int:
+        """Возвращает суммарный ежемесячных доход"""
+        return self._income["wage"] + self._income["bonus"]
+
+
+welder_sloted = Position_Sloted('иван', 'васильев', 'сварщик', {'wage': 50000, 'bonus': 15000})
+print(asizeof.asizeof(welder_sloted))  # 864
+
+# Для оптимизации использовал слоты. Произошло сокращение памяти с 1064 до 864
