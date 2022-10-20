@@ -16,3 +16,63 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def find_mediana(m):
+    length = 2 * m + 1
+    orig_list = [randint(-100, 100) for _ in range(length)]
+
+    mediana = median(orig_list)
+    # print(f'Массив {orig_list}')
+    # print(f'Медиана {mediana}')
+
+
+# замеры 10
+print(
+    timeit(
+        "find_mediana(5)",
+        globals=globals(),
+        number=1000))
+
+# замеры 100
+print(
+    timeit(
+        "find_mediana(50)",
+        globals=globals(),
+        number=1000))
+
+# замеры 1000
+print(
+    timeit(
+        "find_mediana(500)",
+        globals=globals(),
+        number=1000))
+
+"""
+0.0074053999851457775
+0.06373520000488497
+0.6868125000037253
+"""
+
+"""
+Итоги:
+Гномья сортировка
+0.019636500015622005
+0.672767100011697
+72.56054130001576
+
+Без сортировки
+0.011868100002175197
+0.18644760001916438
+11.85983619999024
+
+Встроенная функция median из модуля statistics
+0.0074053999851457775
+0.06373520000488497
+0.6868125000037253
+
+Быстрее всех работает третий вариант
+"""
