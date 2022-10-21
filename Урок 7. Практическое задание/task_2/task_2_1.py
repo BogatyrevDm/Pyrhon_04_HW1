@@ -33,7 +33,7 @@ def find_mediana(m):
             orig_list[i - 1], orig_list[i] = orig_list[i], orig_list[i - 1]
             if i > 1:
                 i -= 1
-    mediana = orig_list[m]
+    mediana = orig_list
 
 find_mediana(2)
 
