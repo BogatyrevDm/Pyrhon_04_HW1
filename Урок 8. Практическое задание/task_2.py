@@ -13,6 +13,11 @@
 """
 
 
+class BinaryTreeWrongValue(Exception):
+    def __init__(self, txt):
+        self.txt = txt
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -24,6 +29,9 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        if new_node > self.root:
+            raise BinaryTreeWrongValue(
+                f'Значение левой ветки не может быть больше корня! \n Левое значение: {new_node} \n Корень: {self.root}')
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -39,6 +47,9 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node < self.root:
+            raise BinaryTreeWrongValue(
+                f'Значение правой ветки не может быть меньше корня! \n Правое значение: {new_node} \n Корень: {self.root}')
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -72,9 +83,18 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+# Ошибка
+try:
+    r.insert_right(6)
+except BinaryTreeWrongValue as arr:
+    print(arr.txt)
+# Ошибка
+try:
+    r.insert_left(40)
+except BinaryTreeWrongValue as arr:
+    print(arr.txt)
 print(r.get_left_child())
-print(r.get_left_child().get_root_val())
+# print(r.get_left_child().get_root_val())
 r.insert_right(12)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
